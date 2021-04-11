@@ -9,7 +9,6 @@ public class Trajectory : MonoBehaviour
     [SerializeField] GameObject dotPrefab;
     [SerializeField] private float dotSpacing;
 
-
     private Transform[] dotsList;
     private Vector2 pos;
     private float timeStamp;
