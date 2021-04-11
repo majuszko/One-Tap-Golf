@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Hole
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Background
+  - Ground
+  - Underground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1222987347
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Underground
+    uniqueID: 261093773
+    locked: 0
+  - name: Ground
+    uniqueID: 3164391229
+    locked: 0
+  - name: Flag
+    uniqueID: 4246144273
+    locked: 0
+  - name: Hole
+    uniqueID: 1918505965
+    locked: 0
+  - name: Ball
+    uniqueID: 3489803023
+    locked: 0
