@@ -7,7 +7,12 @@ public class Ball : MonoBehaviour
 {
     public Rigidbody2D rb;
     public CircleCollider2D coll;
-    [HideInInspector] public Vector3 pos { get { return transform.position; } }
+
+    [HideInInspector]
+    public Vector3 pos
+    {
+        get { return transform.position; }
+    }
 
     private void Awake()
     {
@@ -24,12 +29,13 @@ public class Ball : MonoBehaviour
     {
         rb.isKinematic = false;
     }
+
     public void DesactivateRb()
     {
         rb.angularVelocity = 0f;
         rb.isKinematic = true;
         rb.velocity = Vector2.zero;
-        
+
     }
     
 }

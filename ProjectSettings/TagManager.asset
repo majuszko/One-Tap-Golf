@@ -17,7 +17,7 @@ TagManager:
   - Background
   - Ground
   - Underground
-  - 
+  - Panel
   - 
   - 
   - 
@@ -59,4 +59,7 @@ TagManager:
     locked: 0
   - name: Ball
     uniqueID: 3489803023
+    locked: 0
+  - name: Panel
+    uniqueID: 25381919
     locked: 0

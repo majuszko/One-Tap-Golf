@@ -8,25 +8,28 @@ public class GameManager : MonoBehaviour
 {
     private bool dragged = false;
     private bool shot = false;
+    private bool ballInHole = false;
     private int multiplier=1;
     private float distance;
     private float holdDownStartTime;
     private float holdDownTime;
     private float maxHoldDownTime = 2f;
+    private float rand;
     private Vector2 startPosition;
     private Vector2 endPosition;
     private Vector2 direction;
     private Vector2 force;
+    private Vector2 target;
     private GameObject flagClone;
     public int points=0;
     public static GameManager gm;
     public Trajectory traj;
     public Ball ball;
-    public Flag flag;
+    public Score score;
     public GameObject flagPref;
-    
     [SerializeField] private float goForce = 4f;
-    
+    [SerializeField] GameObject ground;
+    [SerializeField] private GameObject GameOverPanel;
 
     void Awake()
     {
@@ -34,20 +37,18 @@ public class GameManager : MonoBehaviour
         {
             gm = this;
         }
-        
     }
-
     void Start()
     {
-        float rand = Random.Range(-2.0f, 8.0f);
+        rand = Random.Range(-2.0f, 8.0f);
         ball.DesactivateRb();
         flagClone = (GameObject)Instantiate(flagPref, new Vector3(rand, 0, 0), Quaternion.identity);
+        target = ball.pos;
+        ground = GameObject.Find("Ground");
     }
 
     private void Update()
     {
-        
-        
         if (Input.GetMouseButtonDown(0)&&shot==false)
         {
             dragged = true;
@@ -59,7 +60,6 @@ public class GameManager : MonoBehaviour
             dragged = false;
             OnDragEnd();
         }
-
         if (dragged)
         {
             double x = Math.Round(holdDownTime, 1);
@@ -69,10 +69,18 @@ public class GameManager : MonoBehaviour
                 dragged = false; 
                 OnDragEnd();
             }
-
+        }
+        if (ballInHole)
+        {
+            rand = Random.Range(-2.0f, 8.0f);
+            ball.DesactivateRb();
+            flagClone = (GameObject)Instantiate(flagPref, new Vector3(rand, 0, 0), Quaternion.identity);
+            ballInHole = false;
+            shot = false;
+            ground.GetComponent<BoxCollider2D>().enabled = true;
+            ball.transform.position = target;
         }
     }
-
     void OnDragStart()
     {
         ball.DesactivateRb();
@@ -88,7 +96,6 @@ public class GameManager : MonoBehaviour
         direction = (startPosition - endPosition).normalized;
         force = direction * distance * goForce;
         traj.UpdateDots(ball.pos, force);
-        
     }
     void OnDragEnd()
     {
@@ -96,23 +103,21 @@ public class GameManager : MonoBehaviour
         ball.Go(force);
         traj.Hide();
         shot = true;
-        //TODO a timer so i can check if u lost or not
+        Invoke("GameLost", 4f);
     }
-
-    public void GameWon()
-    {
-        Debug.Log("YOU WON");
-    }
+    
     public void BallInHole()
     {
         points += 1;
+        score.ScoreAdd();
         multiplier += points / 10;
-        Destroy(flagClone,0.2f);
+        Destroy(flagClone,0f);
+        ballInHole = true;
+        CancelInvoke();
     }
-
     void GameLost()
     {
-        Debug.Log("YOU LOST");
+        GameOverPanel.SetActive(true);
     }
-
+    
 }

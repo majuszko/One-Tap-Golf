@@ -7,6 +7,7 @@ public class ButtonAction : MonoBehaviour
 {
     public void StartLvl()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level");
     } 
+    
 }
